@@ -1,0 +1,46 @@
+Step 2: Backend (Django) - The Brain
+
+1. Install Python Packages
+Create backend/requirements.txt (like a shopping list):
+
+Pyhton:
+
+Django==4.2
+djangorestframework==3.14
+psycopg2-binary==2.9.6  # For PostgreSQL
+redis==4.5.5            # Leaderboards
+
+2. User Model
+Create backend/users/models.py (for students/teachers):
+
+Pyhton:
+
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    USER_TYPES = [
+        ('STUDENT', 'Student'),
+        ('TEACHER', 'Teacher'),
+        ('SPONSOR', 'Sponsor'),
+    ]
+    user_type = models.CharField(max_length=10, choices=USER_TYPES)
+    superhero_name = models.CharField(max_length=100, unique=True)  # Fun anonymous name!
+    avatar = models.URLField(blank=True)  # Link to their superhero image
+
+3. Gamification (Badges & Leaderboards)
+Create backend/gamification/models.py:
+
+Pyhton:
+
+from django.db import models
+from users.models import CustomUser
+
+class Badge(models.Model):
+    name = models.CharField(max_length=100)  # E.g., "Math Wizard"
+    description = models.TextField()
+    icon = models.URLField()  # Link to a cool badge image
+
+class Achievement(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    badge = models.ForeignKey(Badge, on_delete=models.CASCADE)
+    date_earned = models.DateTimeField(auto_now_add=True)  # When they earned it
