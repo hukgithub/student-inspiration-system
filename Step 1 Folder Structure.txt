@@ -1,20 +1,19 @@
-Step 1: Folder Structure
-Create this folder structure (like drawers in a cabinet):
-
 student-inspiration-system/
-├── backend/                  # Django backend (brain of the system)
-│   ├── core/                # Shared settings
-│   ├── users/               # Students, teachers, sponsors
-│   ├── gamification/        # Badges, leaderboards
-│   ├── ai_engine/           # Quizzes and career predictions
-│   ├── requirements.txt     # List of Python packages
-│   └── manage.py            # Django’s control center
-├── frontend/                # React.js frontend (user interface)
+├── backend/
+│   ├── users/
+│   │   ├── __init__.py
+│   │   ├── models.py          # Custom user model
+│   │   └── permissions.py     # Role-based permissions
+│   ├── gamification/
+│   │   ├── __init__.py
+│   │   └── models.py          # Badges/achievements
+│   ├── requirements.txt       # Python packages
+│   └── manage.py              # Django commands
+├── frontend/
 │   ├── src/
-│   │   ├── components/      # Reusable pieces (like LEGO)
-│   │   ├── App.js           # Main app component
-│   │   └── index.js         # Starting point
-│   ├── package.json         # List of JavaScript tools
-│   └── Dockerfile
-├── docker-compose.yml       # Magic recipe to run everything
-└── README.md                # Instruction manual
+│   │   ├── components/
+│   │   │   └── dashboards/    # Role-specific dashboards
+│   │   ├── App.js
+│   │   └── index.js
+│   └── package.json           # React dependencies
+└── docker-compose.yml         # Docker setup
